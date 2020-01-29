@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
 
+	eel.getCWD()(function(ret){
+		$('input[name=filePath]').attr('placeholder', ret);
+	})
+
+	
+
 	$("form#getFilesForm").on("submit", function(e){
 		e.preventDefault();
 		let filePath = $('input[name=filePath]').val();
