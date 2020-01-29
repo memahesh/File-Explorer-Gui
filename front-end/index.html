@@ -8,18 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello World!</title>
     <link rel="stylesheet" href="styles/style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
-
 </head>
 
 <body>
 
-    <input type="text" id="num-1" placeholder="Enter number.">
-    <input type="text" id="num-2" placeholder="Enter number.">
-    <input type="button" class="submit" value="Add" onclick="operate(eel.add)">
-    <input type="button" class="submit" value="Subtract" onclick="operate(eel.subtract)">
-    <span id="output"></span>
+    
+
+    <div class="container">
+        <div class="row">
+            <form id="getFilesForm">
+                <input type="text" id="filePath" name="filePath" placeholder="Enter file path" style="width:100px;">
+                <input type="submit" value="Get Files">
+            </form>
+        </div>
+        <div class="row" id="contentContainer" style="margin-top:50px">
+            
+        </div>
+    </div>
+
+
 </body>
 
 </html>
