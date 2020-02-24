@@ -5,6 +5,8 @@ eel.init('front-end')
 
 currPath = os.getcwd()
 
+rootPath = os.path.abspath(os.sep)
+
 @eel.expose
 def getCWD():
 	return currPath
@@ -26,19 +28,30 @@ def fileType(fileName):
 
 @eel.expose
 def getFiles(path):
-    
-
-	filesList = os.listdir(os.path.join(currPath, path))
-
+	
 	detailedFilesList = []
 
-	for file in filesList:
-		temp = []
-		temp.append(file)
-		temp.append(fileType(file))
-		detailedFilesList.append(temp)
+	try:
+		if not path:
+			path = rootPath
 
-	return detailedFilesList
+		filesList = os.listdir(path)
+
+		for file in filesList:
+			temp = []
+			temp.append(file)
+			temp.append(fileType(file))
+			detailedFilesList.append(temp)
+
+		responseCode = 200
+
+	except FileNotFoundError:
+		responseCode = 404
+
+
+	response = [responseCode, path, detailedFilesList]
+
+	return response
 
 
 eel.start('index.html', size=(1000, 600))
