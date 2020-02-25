@@ -1,3 +1,13 @@
+# FExplorer
+
+![FExplorer](assets/FExplorer-long.PNG)
+
+An attempt at making a generic replica of File Explorer for any Operating System supporting Python.
+
+# Requirements
+
+Python module : ```eel```
+
 # Install
 
 ```pip install -r requirements.txt ```
@@ -10,6 +20,7 @@
 
  - [ ] Packaging the application
  - [x] Beautify the application page
+ - [ ] Implement Object Oriented Programming in JavaScript
  - [ ] Add Images to README.md
  - [ ] Fill README.md
  - [x] Add Feature to go to parent directory

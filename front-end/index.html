@@ -31,13 +31,16 @@
 <body>
 
     <div class="container">
-        <div class="row" style="max-height:100px; margin:20px 0;">
+        <div class="row" style="max-height:100px; margin:20px 0; margin-left:50px !important;">
+
             <image src="assets/FExplorer-long.PNG" style="height:50px;"/>
+            
             <form id="getFilesForm" class="form-inline">
                 
-                <i class="parentDirectory fa fa-arrow-up"></i>
+                <i class="parentDirectory fa fa-caret-up" style="color: #5486c7; font-size: 20px;"></i>
                 
                 <input type="text" class="form-control" id="filePath" name="filePath" placeholder="Enter file path" style="width:350px; margin:0 10px;">
+
                 <button type="submit" class="btn btnCustom">
                     <i class="fa fa-search"></i>
                      Get files

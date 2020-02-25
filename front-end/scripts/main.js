@@ -50,7 +50,7 @@ $(document).ready(function(){
 	// Function to create HTML/DOM of one single element
 	function contentDOM(fileName, fileType){
 		let container = $('<div>', {class:'col-md-3 file '+fileType});
-		let img = $('<img>', {src:'assets/'+fileType+'-icon.png', width:150});
+		let img = $('<img>', {src:'assets/'+fileType+'-icon.png', width:150, class:'mx-auto d-block'});
 		let p = $('<p>', {class:'text-info text-center fileName'}).text(fileName);
 		container.append(img);
 		container.append(p);
