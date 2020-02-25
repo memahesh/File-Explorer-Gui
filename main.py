@@ -47,6 +47,8 @@ def getFiles(path):
 
 	except FileNotFoundError:
 		responseCode = 404
+	except PermissionError:
+		responseCode = 401
 
 
 	response = [responseCode, path, detailedFilesList]

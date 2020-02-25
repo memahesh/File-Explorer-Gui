@@ -1,0 +1,28 @@
+#filePath{
+	border:none;
+	border-bottom:1.5px solid #5486c7;
+	border-radius:0;
+	opacity:0.5;
+}
+
+#filePath:focus, button:focus{
+	border-bottom:1.5px solid #5486c7;
+	box-shadow:none;
+	opacity: 1.0;
+}
+
+.btnCustom{
+	border-radius:20px !important;
+	background-color:#5486c7 !important;
+	color:white !important;
+	opacity:1.0;
+}
+
+.btnCustom:hover{
+	opacity:0.5;
+}
+
+
+.fileName{
+	word-break:break-word;
+}
