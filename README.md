@@ -54,7 +54,7 @@ Find the executable [here](dist/FExplorer.exe) for the FileExplorer Application
  - [x] Add Images to README.md
  - [x] Fill README.md
  - [x] Add Feature to go to parent directory
- - [ ] Verify on all Operating Systems
+ - [x] Verify on different OS
  - [x] Make an icon :P
  - [x] Get icons for different types of files
  - [x] List Files from Input Text
