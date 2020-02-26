@@ -24,6 +24,10 @@ Python module : ```eel```
 ```python main.py```
 
 
+# Compatibility
+
+ - [x] Windows 
+ - [x] Ubuntu
 
 # Todos
 
