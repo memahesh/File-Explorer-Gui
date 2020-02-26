@@ -1,13 +1,16 @@
 $(document).ready(function(){
 
-	// Gets the path written in the filePath input
-	function getPathText(){
-		return $('input[name=filePath]').val();
+
+	const pathObject = function(){
 	}
 
-	// Updates the path in the filePath input
-	function updatePathText(path){
+	// Gets the path written in the filePath input
+	pathObject.prototype.getPathText = function(){
+		return $('input[name=filePath]').val();
+	};
 
+	// Updates the path in the filePath input
+	pathObject.prototype.updatePathText = function(path){
 		// console.log(path+"-update");
 		// The 3 updates are necessary. See below link for bug and solution
 		// https://www.willis-owen.co.uk/jquery-changing-form-values-not-affecting-the-dom/
@@ -15,40 +18,62 @@ $(document).ready(function(){
 		$('input[name=filePath]').attr('defaultValue', path);
 		$('input[name=filePath]').val(path);
 		// console.log(getPathText()+"-afterUpdate");
+	};
+
+	const contentUpdater = function(){
+
+		this.filePath = new pathObject();
+
 	}
 
 	// Fetches the new list of files and folders for the new input filePath
-	function getNewFiles(filePath){
-		eel.getFiles(filePath)(function(ret){
+	contentUpdater.prototype.getNewFiles = function(fP){
+
+		let contentUpd = this;
+
+		eel.getFiles(fP)(function(ret){
 			if(ret[0] == 200){
-				updatePathText(ret[1]);
-				addFilesToDOM(ret[2]);				
+				contentUpd.filePath.updatePathText(ret[1]);
+				contentUpd.addFilesToDOM(ret[2]);				
 			}else if(ret[0] == 404){
 				alert("Path not found. Please check the path again");
 			}else if(ret[0] == 401){
 				alert("Permission Error: Access is denied. You can not view this folder using this app.");
 			}
 		});
-	}
+	};
 
-	// On Input submit, new batch of files are fetched
-	$("form#getFilesForm").on("submit", function(e){
-		e.preventDefault();
-		getNewFiles(getPathText());
-	});
-	
 	// Function to add files to DOM
-	function addFilesToDOM(ret){
-		resetContentContainer();
+	contentUpdater.prototype.addFilesToDOM = function(ret){
+		this.resetContentContainer();
 		let div = $('div#contentContainer');
 		let N = ret.length;
 		for(let i=0; i<N; i++){
-			div.append(contentDOM(ret[i][0], ret[i][1]));
+			div.append(this.contentDOM(ret[i][0], ret[i][1]));
 		}
-	}
+	};
+
+	// Resets the content container
+	contentUpdater.prototype.resetContentContainer = function(){
+		$('div#contentContainer').html("");
+	};
+
+	// Function that changes the current directory to parent of 'the current directory'
+	contentUpdater.prototype.goToParent = function(){
+		let pathList = this.filePath.getPathText().split('\\');
+		console.log(pathList);
+		if(pathList.length > 1){
+			pathList.pop();
+			pathList.pop();
+			pathList.push("");
+		}
+		let newFilePath = pathList.join('\\');
+		this.getNewFiles(newFilePath);
+	};
 
 	// Function to create HTML/DOM of one single element
-	function contentDOM(fileName, fileType){
+	contentUpdater.prototype.contentDOM = function(fileName, fileType){
+		let contentUpd = this;
 		let container = $('<div>', {class:'col-md-3 file '+fileType});
 		let img = $('<img>', {src:'assets/'+fileType+'-icon.png', width:150, class:'mx-auto d-block'});
 		let p = $('<p>', {class:'text-info text-center fileName'}).text(fileName);
@@ -56,8 +81,8 @@ $(document).ready(function(){
 		container.append(p);
 		if(fileType == 'folder'){
 			container.on('click', function(){
-				let newWorkingDir = getPathText()+fileName+"\\";
-				getNewFiles(newWorkingDir);
+				let newWorkingDir = contentUpd.filePath.getPathText()+fileName+"\\";
+				contentUpd.getNewFiles(newWorkingDir);
 			});	
 		}else{
 			container.on('click', function(){
@@ -66,31 +91,26 @@ $(document).ready(function(){
 		}
 		
 		return container;
-	}
+	};
 
-	// Resets/ Empties the HTML in the container before re-filling
-	function resetContentContainer(){
-		$('div#contentContainer').html("");
-	}
+	var filePath = new pathObject();
+	var main = new contentUpdater();
 
-	// Function that changes the current directory to parent of 'the current directory'
-	function goToParent(){
-		let pathList = getPathText().split('\\');
-		console.log(pathList);
-		if(pathList.length > 1){
-			pathList.pop();
-			pathList.pop();
-			pathList.push("");
-		}
-		let newFilePath = pathList.join('\\');
-		getNewFiles(newFilePath);
-	}
+	console.log(filePath.getPathText());
 
+
+	// On Input submit, new batch of files are fetched
+	$("form#getFilesForm").on("submit", function(e){
+		e.preventDefault();
+		main.getNewFiles(filePath.getPathText());
+	});
+
+	// On Click function, reset the file path to parent directory
 	$(".parentDirectory").on("click", function(){
-		goToParent();
+		main.goToParent();
 	});
 
 	// On FExplorer's load
-	getNewFiles();
+	main.getNewFiles();
 
 });
