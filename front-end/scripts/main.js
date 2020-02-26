@@ -60,14 +60,14 @@ $(document).ready(function(){
 
 	// Function that changes the current directory to parent of 'the current directory'
 	contentUpdater.prototype.goToParent = function(){
-		let pathList = this.filePath.getPathText().split('\\');
+		let pathList = this.filePath.getPathText().split('/');
 		console.log(pathList);
 		if(pathList.length > 1){
 			pathList.pop();
 			pathList.pop();
 			pathList.push("");
 		}
-		let newFilePath = pathList.join('\\');
+		let newFilePath = pathList.join('/');
 		this.getNewFiles(newFilePath);
 	};
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
 		container.append(p);
 		if(fileType == 'folder'){
 			container.on('click', function(){
-				let newWorkingDir = contentUpd.filePath.getPathText()+fileName+"\\";
+				let newWorkingDir = contentUpd.filePath.getPathText()+fileName+"/";
 				contentUpd.getNewFiles(newWorkingDir);
 			});	
 		}else{
