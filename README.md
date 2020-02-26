@@ -28,7 +28,7 @@ Python module : ```eel```
 
 Taken from [here](https://github.com/samuelhwilliams/Eel). Look at the last few sections.
 
-Find the executable [here](dist/FExplorer.exe) for the FileExplorer Application
+Find the executable [here](FExplorer.exe) for the FileExplorer Application
 
 ## Building distributable binary with PyInstaller
 
